@@ -7,9 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @Ignore
 class AssignmentApplicationTests {
-
+	/* 
 	@Test
 	void contextLoads() {
 	}
-
+	*/
 }

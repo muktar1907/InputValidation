@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
-@Service
+@Service//lets springboot know to use this class when creating instance of class that uses PhoneBookService interface
 @Transactional
 public class PhoneBookServiceImpl implements PhoneBookService{
     @Autowired
@@ -21,10 +23,70 @@ public class PhoneBookServiceImpl implements PhoneBookService{
     public List<PhoneBookEntry> list() {
         return phoneBookRepository.list();
     }
+    //input validation will be handled in the service class before calls to repository
+    public static boolean validate(String name, String phoneNumber)
+    {
+        //name validation
+        String namePattern="[a-z]{1,}('|-)?[a-z]{1,}( [a-z]{1,}('|-)?[a-z]{1,}(-)?[a-z]{1,})?";
+        Pattern validName= Pattern.compile(namePattern,Pattern.CASE_INSENSITIVE);
+        Matcher nameMatch= validName.matcher(name);
+        boolean nMatch=nameMatch.matches();
+        if(!nMatch)
+        {
+            namePattern="[a-z]{1,}('|-)?[a-z]{1,}(-)?[a-z]{1,}, [a-z]{1,}('|-)?[a-z]{1,}( [a-z]{1,}(')?[a-z]{1,}| [a-z]{1}.)?";
+            validName=Pattern.compile(namePattern,Pattern.CASE_INSENSITIVE);
+            nameMatch= validName.matcher(name);
+            nMatch=nameMatch.matches();
+        }
+        //phone validation-------------------------------------------------------------------------------------------------------------
+        int i=1;
+        boolean pMatch=false;
+        String numPattern="";
+        while(pMatch==false && i<=7)
+        {
+            switch(i)
+            {
+                case 1:
+                    numPattern= "([0-9]){5}";
+                    break;
+                case 2:
+                    numPattern="((\\+?[0-9]{1,3})( |))?(\\([0-9]{3}\\))?([0-9]){3}([. -])([0-9]){4}";
+                    break;
+                case 3:
+                    numPattern="((\\+?[0-9]{1,3})( |-))?([0-9]{3}-)?([0-9]){3}-([0-9]){4}";
+                    break;
+                case 4:
+                    numPattern="((\\+?[0-9]{1,3})( |.))?([0-9]{3}\\.)?([0-9]){3}\\.([0-9]){4}";
+                    break;
+                case 5:
+                    numPattern="((\\+?[0-9]{1,3})( |))?([0-9]{3} )?([0-9]){3} ([0-9]){4}";
+                    break;
+                case 6:
+                    numPattern="(\\+45|[0-9]{2})? [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}";
+                    break;
+                case 7:
+                    numPattern="(\\+45|[0-9]{2})? [0-9]{4} [0-9]{4}";
+                    break;
+                default:
+                    break;
 
+            }
+
+
+            Pattern validNum= Pattern.compile(numPattern);
+            Matcher numMatch= validNum.matcher(name);
+            pMatch=numMatch.matches();
+            i++;
+        }
+        return pMatch && nMatch;
+    }
     @Override
     public void add(PhoneBookEntry phoneBookEntry) {
-        phoneBookRepository.save(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber());
+        
+        if(validate(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber())==true)
+        {
+            phoneBookRepository.save(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber());
+        }
     }
 
     @Override

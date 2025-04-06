@@ -12,7 +12,8 @@ import java.util.List;
 
 @RestController
 public class Controller {
-    @Autowired
+    @Autowired//causes Springboot to create instance of PhoneBookServiceImpl since it implements the interface PhoneBookService
+
     PhoneBookService phoneBookService;
 
     @GetMapping(path = "phoneBook/list")
