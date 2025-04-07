@@ -70,22 +70,28 @@ public class PhoneBookServiceImpl implements PhoneBookService{
                 default:
                     break;
 
+                    
             }
 
 
             Pattern validNum= Pattern.compile(numPattern);
-            Matcher numMatch= validNum.matcher(name);
+            Matcher numMatch= validNum.matcher(phoneNumber);
             pMatch=numMatch.matches();
             i++;
         }
-        return pMatch && nMatch;
+        return (pMatch && nMatch);
     }
     @Override
-    public void add(PhoneBookEntry phoneBookEntry) {
+    public void add(PhoneBookEntry phoneBookEntry) throws Exception {
         
         if(validate(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber())==true)
         {
             phoneBookRepository.save(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber());
+            
+        }
+        else if(validate(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber())==false)
+        {
+            throw new Exception("Invalid Input");//this exception will be caught by the controller
         }
     }
 

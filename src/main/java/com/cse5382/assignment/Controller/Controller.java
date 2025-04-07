@@ -18,6 +18,10 @@ public class Controller {
 
     @GetMapping(path = "phoneBook/list")
     public List<PhoneBookEntry> list(){
+        for(PhoneBookEntry e : phoneBookService.list())
+        {
+            System.out.println("Name:"+e.getName()+"\nPhone: "+e.getPhoneNumber()+"\n");
+        }
         return phoneBookService.list();
     }
 
@@ -28,7 +32,7 @@ public class Controller {
         }catch(Exception e){
             return new ResponseEntity<Error>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Added:\nName:"+phoneBookEntry.getName()+"\nPhone: "+phoneBookEntry.getPhoneNumber()+"\n",HttpStatus.OK);
     }
 
     @PutMapping(path = "phoneBook/deleteByName")

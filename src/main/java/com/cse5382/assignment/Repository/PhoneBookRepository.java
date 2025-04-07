@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,19 +15,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Component
+@Repository
 public class PhoneBookRepository {
+
+
+    @PersistenceContext//entityManager will be used to persist changes to mySQL database
+    EntityManager entityManager;
 
     List<PhoneBookEntry> list = new ArrayList<>();
     public List<PhoneBookEntry> list(){
         return  list;
     }
-
+    @Transactional//used to ensure changes are committed
     public void save(String name, String phoneNumber){
         PhoneBookEntry phoneBookEntry = new PhoneBookEntry();
         phoneBookEntry.setPhoneNumber(phoneNumber);
         phoneBookEntry.setName(name);
         list.add(phoneBookEntry);
+        entityManager.persist(phoneBookEntry);
     }
 
 

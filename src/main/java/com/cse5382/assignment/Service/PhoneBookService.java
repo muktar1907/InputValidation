@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PhoneBookService {
     public List<PhoneBookEntry> list();
-    public void add(PhoneBookEntry phoneBookEntry);
+    public void add(PhoneBookEntry phoneBookEntry) throws Exception;
 
     public void deleteByName(String name);
 
