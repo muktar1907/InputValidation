@@ -2,9 +2,9 @@
 #MySQL Database Configuration
 spring:
   application:
-    name: PhoneBook
+    name: phonebook
   datasource:
-    url: jdbc:mysql://localhost:3306/PhoneBook
+    url: jdbc:mysql://host.docker.internal:3306/PhoneBook
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
