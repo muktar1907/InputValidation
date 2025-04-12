@@ -6,11 +6,12 @@ import java.util.List;
 
 public interface PhoneBookService {
     public List<PhoneBookEntry> list();
+    //each function has to be able to throw exception so that the controller class can differentiate cause of failure
     public void add(PhoneBookEntry phoneBookEntry) throws Exception;
 
-    public void deleteByName(String name);
+    public void deleteByName(String name) throws Exception;
 
-    public void deleteByNumber(String phoneNumber);
+    public void deleteByNumber(String phoneNumber) throws Exception;
     
 
 }

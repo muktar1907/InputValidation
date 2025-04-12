@@ -30,6 +30,10 @@ public class Controller {
         try {
             phoneBookService.add(phoneBookEntry);
         }catch(Exception e){
+            if(e.getMessage().equals("Invalid Input"))
+            {
+                return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+            }
             return new ResponseEntity<Error>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("Added:\nName:"+phoneBookEntry.getName()+"\nPhone: "+phoneBookEntry.getPhoneNumber()+"\n",HttpStatus.OK);
@@ -40,6 +44,14 @@ public class Controller {
         try {
             phoneBookService.deleteByName(name);
         }catch(Exception e){
+            if(e.getMessage().equals("Invalid Input"))
+            {
+                return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+            }
+            else if(e.getMessage().equals("Content Not Found"))
+            {
+                return new ResponseEntity<Error>(HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<Error>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -50,6 +62,14 @@ public class Controller {
         try {
             phoneBookService.deleteByNumber(number);
         }catch(Exception e){
+            if(e.getMessage().equals("Invalid Input"))
+            {
+                return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
+            }
+            else if(e.getMessage().equals("Content Not Found"))
+            {
+                return new ResponseEntity<Error>(HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<Error>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(HttpStatus.OK);

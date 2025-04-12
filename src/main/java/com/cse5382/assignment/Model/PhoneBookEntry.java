@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 
 
-@Entity
+@Entity(name="phonebook")
 @Table(name="phonebook")
 public class PhoneBookEntry   {
 

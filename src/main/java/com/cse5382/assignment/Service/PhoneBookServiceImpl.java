@@ -24,7 +24,7 @@ public class PhoneBookServiceImpl implements PhoneBookService{
         return phoneBookRepository.list();
     }
     //input validation will be handled in the service class before calls to repository
-    public static boolean validate(String name, String phoneNumber)
+    public static boolean validateName(String name)
     {
         //name validation
         String namePattern="[a-z]{1,}('|-)?[a-z]{1,}( [a-z]{1,}('|-)?[a-z]{1,}(-)?[a-z]{1,})?";
@@ -38,6 +38,10 @@ public class PhoneBookServiceImpl implements PhoneBookService{
             nameMatch= validName.matcher(name);
             nMatch=nameMatch.matches();
         }
+        return nMatch;
+    }
+    public static boolean validateNum(String phoneNumber)
+    {
         //phone validation-------------------------------------------------------------------------------------------------------------
         int i=1;
         boolean pMatch=false;
@@ -79,30 +83,59 @@ public class PhoneBookServiceImpl implements PhoneBookService{
             pMatch=numMatch.matches();
             i++;
         }
-        return (pMatch && nMatch);
+        return pMatch;
     }
     @Override
     public void add(PhoneBookEntry phoneBookEntry) throws Exception {
         
-        if(validate(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber())==true)
+        if(validateName(phoneBookEntry.getName())==true && validateNum(phoneBookEntry.getPhoneNumber())==true)
         {
             phoneBookRepository.save(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber());
             
         }
-        else if(validate(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber())==false)
+        else if(validateName(phoneBookEntry.getName())==false || validateNum(phoneBookEntry.getPhoneNumber())==false)
         {
             throw new Exception("Invalid Input");//this exception will be caught by the controller
         }
     }
 
     @Override
-    public void deleteByName(String name) {
-        phoneBookRepository.deleteByName(name);
+    public void deleteByName(String name) throws Exception{
+        //must validate input to prevent injection attack
+        boolean valid= validateName(name);
+        System.out.println(name+" is valid: "+valid);
+        if(valid==true)
+        {
+            boolean exists=phoneBookRepository.deleteByName(name);
+            if(!exists)
+            {
+                throw new Exception("Content Not Found");
+            }
+
+        }
+        else
+        {
+            throw new Exception("Invalid Input");
+        }
+        
     }
 
 
     @Override
-    public void deleteByNumber(String phoneNumber) {
-        phoneBookRepository.deleteByNumber(phoneNumber);
+    public void deleteByNumber(String phoneNumber) throws Exception{
+        //must validate input to prevent injection attack
+        boolean valid= validateNum(phoneNumber);
+        if(valid == true)
+        {
+            boolean exists=phoneBookRepository.deleteByNumber(phoneNumber);
+            if(!exists)
+            {
+                throw new Exception("Content Not Found");
+            }
+        }
+        else
+        {
+            throw new Exception("Invalid Input");
+        }
     }
 }
