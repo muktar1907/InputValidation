@@ -90,8 +90,14 @@ public class PhoneBookServiceImpl implements PhoneBookService{
         
         if(validateName(phoneBookEntry.getName())==true && validateNum(phoneBookEntry.getPhoneNumber())==true)
         {
-            phoneBookRepository.save(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber());
-            
+            if(!(phoneBookRepository.numExists(phoneBookEntry.getPhoneNumber())))//if the number doesn't yet exist then save it
+            {
+                phoneBookRepository.save(phoneBookEntry.getName(),phoneBookEntry.getPhoneNumber());
+            }
+            else
+            {
+                throw new Exception("Existing Phone Number");
+            }
         }
         else if(validateName(phoneBookEntry.getName())==false || validateNum(phoneBookEntry.getPhoneNumber())==false)
         {

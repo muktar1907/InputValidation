@@ -2,7 +2,6 @@ package com.cse5382.assignment.Controller;
 
 import com.cse5382.assignment.Model.PhoneBookEntry;
 import com.cse5382.assignment.Service.PhoneBookService;
-import com.cse5382.assignment.Service.PhoneBookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ public class Controller {
 
     PhoneBookService phoneBookService;
 
-    @GetMapping(path = "phoneBook/list")
+    @GetMapping(path = "/PhoneBook/list")
     public List<PhoneBookEntry> list(){
         for(PhoneBookEntry e : phoneBookService.list())
         {
@@ -25,7 +24,7 @@ public class Controller {
         return phoneBookService.list();
     }
 
-    @PostMapping(path = "phoneBook/add")
+    @PostMapping(path = "/PhoneBook/add")
     public ResponseEntity<?> add(@RequestBody PhoneBookEntry phoneBookEntry){
         try {
             phoneBookService.add(phoneBookEntry);
@@ -39,7 +38,7 @@ public class Controller {
         return new ResponseEntity<>("Added:\nName:"+phoneBookEntry.getName()+"\nPhone: "+phoneBookEntry.getPhoneNumber()+"\n",HttpStatus.OK);
     }
 
-    @PutMapping(path = "phoneBook/deleteByName")
+    @PutMapping(path = "/PhoneBook/deleteByName")
     public ResponseEntity<?> deleteByName(@RequestParam String name){
         try {
             phoneBookService.deleteByName(name);
@@ -57,7 +56,7 @@ public class Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(path = "phoneBook/deleteByNumber")
+    @PutMapping(path = "/PhoneBook/deleteByNumber")
     public ResponseEntity<?> deleteByNumber(@RequestParam String number){
         try {
             phoneBookService.deleteByNumber(number);
