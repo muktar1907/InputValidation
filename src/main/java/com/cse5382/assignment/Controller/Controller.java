@@ -76,6 +76,7 @@ public class Controller {
             LOGGER.warn("User :'{}' \n\tUnexpected error occured when adding phone book entry",authentication.getName());
             return new ResponseEntity<Error>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        LOGGER.info("User '{}' has deleted an entry from the phone book by name: Name:'{}'",authentication.getName(),name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -98,6 +99,7 @@ public class Controller {
             LOGGER.warn("User :'{}' \n\tUnexpected error occured when adding phone book entry",authentication.getName());
             return new ResponseEntity<Error>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        LOGGER.info("User '{}' has deleted an entry from the phone book by number: Number:'{}'",authentication.getName(),number);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
