@@ -7,10 +7,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 
 
 
@@ -20,6 +20,8 @@ public class SecurityConfig
 {
     @Autowired//creates instance of something automatically
     private AdminDetailsService adminDetailsService;
+    @Autowired
+    private CustomAuthenticationEntryPoint myAuthenticationEntryPoint;
     @Bean
     //defines how spring will secure different urls
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception
@@ -33,7 +35,7 @@ public class SecurityConfig
         .antMatchers("/PhoneBook/deleteByNumber").hasRole("ADMIN")
         //any other request must be authenticated(for the sake of completeness)
         .anyRequest().authenticated()
-        ).httpBasic();//enable http basic authorization
+        ).httpBasic(httpBasic->httpBasic.authenticationEntryPoint(myAuthenticationEntryPoint));//enable http basic authorization, helps log failed logins
 
         return http.build();//http.build creates a security filter chain using the specifications above
         //a security filter chain is essentially a checkpoint that all requests go through and the filters above are what it checks for
@@ -52,7 +54,8 @@ public class SecurityConfig
             .passwordEncoder(passwordEncoder())
             .and().build();
     }
-
+ 
+    
     @Bean
     public PasswordEncoder passwordEncoder()
     {

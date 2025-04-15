@@ -2,7 +2,7 @@ package com.cse5382.assignment.Controller;
 
 import com.cse5382.assignment.Model.PhoneBookEntry;
 import com.cse5382.assignment.Service.PhoneBookService;
-import com.cse5382.assignment.Service.PhoneBookServiceImpl;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 public class Controller {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PhoneBookServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
     @Autowired//causes Springboot to create instance of PhoneBookServiceImpl since it implements the interface PhoneBookService
     PhoneBookService phoneBookService;
 
@@ -41,7 +41,7 @@ public class Controller {
             if(e.getMessage().equals("Invalid Input"))
             {
                 
-                LOGGER.info("User '{}' attempted to add an entry with invalid inputs",authentication.getName());
+                LOGGER.warn("User '{}' attempted to add an entry with invalid inputs",authentication.getName());
                 return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
             }
             else if(e.getMessage().equals("Existing Phone Number"))
@@ -65,7 +65,7 @@ public class Controller {
         }catch(Exception e){
             if(e.getMessage().equals("Invalid Input"))
             {
-                LOGGER.info("User '{}' attempted to delete an entry by name but the input was invalid", authentication.getName());
+                LOGGER.warn("User '{}' attempted to delete an entry by name but the input was invalid", authentication.getName());
                 return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
             }
             else if(e.getMessage().equals("Content Not Found"))
@@ -88,7 +88,7 @@ public class Controller {
         }catch(Exception e){
             if(e.getMessage().equals("Invalid Input"))
             {
-                LOGGER.info("User '{}' attempted to delete an entry by number but the input was invalid", authentication.getName());
+                LOGGER.warn("User '{}' attempted to delete an entry by number but the input was invalid", authentication.getName());
                 return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
             }
             else if(e.getMessage().equals("Content Not Found"))
