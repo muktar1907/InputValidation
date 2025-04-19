@@ -7,32 +7,32 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.cse5382.assignment.Model.Admin;
+import com.cse5382.assignment.Model.Users;
 
-public class myAdminDetails implements UserDetails 
+public class myUserDetails implements UserDetails 
 {
-    private Admin admin;//instance of admin class
+    private Users user;//instance of user class
 
     //constructor
-    public myAdminDetails(Admin admin)
+    public myUserDetails(Users user)
     {
-        this.admin=admin;
+        this.user=user;
     }
     @Override
     public String getUsername()
     {
-        return admin.getUser();
+        return user.getUsername();
     }
 
     @Override
     public String getPassword()
     {
-        return admin.getPass();
+        return user.getPassword();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority= new SimpleGrantedAuthority(admin.getRole());
+        SimpleGrantedAuthority authority= new SimpleGrantedAuthority(user.getRole());
         return Arrays.asList(authority);//function expects a collection
     }
 

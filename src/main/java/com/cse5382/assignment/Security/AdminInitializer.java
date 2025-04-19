@@ -1,6 +1,6 @@
 package com.cse5382.assignment.Security;
-import com.cse5382.assignment.Model.Admin;
-import com.cse5382.assignment.Repository.AdminRepository;
+import com.cse5382.assignment.Model.Users;
+import com.cse5382.assignment.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ public class AdminInitializer implements CommandLineRunner
 {
     @Autowired
     //instance of admin repo needed to check if initial admin exists and if not to add it
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
     @Autowired
     //instance of a passwordEncoder needed to encode the initial admin's password
@@ -29,15 +29,14 @@ public class AdminInitializer implements CommandLineRunner
     public void run(String... args)
     {
         
-        if(adminRepository.getUserByUsername(defaultUsername)==null)//if the default admin doesn't exist
+        if(userRepository.getUserByUsername(defaultUsername)==null)//if the default admin doesn't exist
         {
             System.out.println("Initializing Admin");
-            Admin admin= new Admin();
-            admin.setUser(defaultUsername);
+            Users admin= new Users("ROLE_ADMIN");
+            admin.setUsername(defaultUsername);
             //encode password before storing it
-            admin.setPass(passwordEncoder.encode(defaultPassword));
-
-            adminRepository.save(admin);
+            admin.setPassword(passwordEncoder.encode(defaultPassword));
+            userRepository.save(admin);
             System.out.println("Default Admin Initialized");
         }
         else

@@ -67,25 +67,31 @@ public class PhoneBookRepository {
     }
 
     @Transactional//ensures consistency of database after updates
-    public boolean deleteByNumber(String phoneNumber){
-        int index = IntStream.range(0, list.size())
+    public String deleteByNumber(String phoneNumber){
+        /*int index = IntStream.range(0, list.size())
                 .filter(i -> list.get(i).getPhoneNumber().equals(phoneNumber))
                 .findFirst()
                 .orElse(-1);
         if(index!=-1){
             list.remove(index);
-        }
+        }*/
+        String name="";
         //create queries
         //first must check if the name exists in the database at all
         
         if(!numExists(phoneNumber))//if the number doesn't exist then return false, deletion failed
         {
-            return false;
+            return name;
         }
+        //get name before deleting entry
+        TypedQuery<String> findName=entityManager.createQuery("select p.name from phonebook p where p.phoneNumber = :phoneNumber",String.class);
+        findName.setParameter("phoneNumber", phoneNumber);
+        List<String>result=findName.getResultList();
+        name=result.get(0);
         Query query=entityManager.createQuery("delete from phonebook p where p.phoneNumber = :phoneNumber");
         query.setParameter("phoneNumber", phoneNumber);
         query.executeUpdate();
-        return true;
+        return name;
     }
     
     public boolean numExists(String phoneNumber)

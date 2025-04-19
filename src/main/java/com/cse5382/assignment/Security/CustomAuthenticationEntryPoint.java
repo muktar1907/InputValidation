@@ -39,7 +39,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint
                 String credentials= new String(decodedBytes,StandardCharsets.UTF_8);//utf-8 is global standard
                 String[] userAndPass=credentials.split(":");
                 username=userAndPass[0];
-                LOGGER.warn("Failed attempt to access {} with username {}",request.getRequestURI(),username);
+                LOGGER.warn("Failed attempt to access {} with username '{}'",request.getRequestURI(),username);
             } catch (Exception e) 
             {
                 

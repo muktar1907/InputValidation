@@ -19,22 +19,27 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig
 {
     @Autowired//creates instance of something automatically
-    private AdminDetailsService adminDetailsService;
+    private MyUserDetailsService adminDetailsService;
     @Autowired
     private CustomAuthenticationEntryPoint myAuthenticationEntryPoint;
     @Bean
     //defines how spring will secure different urls
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception
     {
+        System.out.println(">>> Custom Security Config Loaded!");
         http.csrf().disable()
         .authorizeHttpRequests(auth->auth
-        .antMatchers("/PhoneBook/list").permitAll()//all visitors of this url have access
         //visitors to the next 3 urls must be admin
+        .antMatchers("/PhoneBook/createUser").permitAll()
+        .antMatchers("/PhoneBook/createAdmin").hasRole("ADMIN")
+        .antMatchers("/PhoneBook/deleteUser").hasAnyRole("USER")
+        .antMatchers("/PhoneBook/deleteAdmin").hasRole("ADMIN")
+        .antMatchers("/PhoneBook/list").hasAnyRole("USER","ADMIN")
         .antMatchers("/PhoneBook/add").hasRole("ADMIN")
         .antMatchers("/PhoneBook/deleteByName").hasRole("ADMIN")
         .antMatchers("/PhoneBook/deleteByNumber").hasRole("ADMIN")
         //any other request must be authenticated(for the sake of completeness)
-        .anyRequest().authenticated()
+        .anyRequest().authenticated() 
         ).httpBasic(httpBasic->httpBasic.authenticationEntryPoint(myAuthenticationEntryPoint));//enable http basic authorization, helps log failed logins
 
         return http.build();//http.build creates a security filter chain using the specifications above

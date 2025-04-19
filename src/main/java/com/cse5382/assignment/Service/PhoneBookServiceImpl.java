@@ -125,16 +125,17 @@ public class PhoneBookServiceImpl implements PhoneBookService{
 
 
     @Override
-    public void deleteByNumber(String phoneNumber) throws Exception{
+    public String deleteByNumber(String phoneNumber) throws Exception{
         //must validate input to prevent injection attack
         boolean valid= validateNum(phoneNumber);
         if(valid == true)
         {
-            boolean exists=phoneBookRepository.deleteByNumber(phoneNumber);
-            if(!exists)
+            String exists=phoneBookRepository.deleteByNumber(phoneNumber);
+            if(exists.equals(""))
             {
                 throw new Exception("Content Not Found");
             }
+            return exists;
         }
         else
         {
