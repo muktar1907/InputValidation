@@ -38,6 +38,7 @@ public class SecurityConfig
         .antMatchers("/PhoneBook/add").hasRole("ADMIN")
         .antMatchers("/PhoneBook/deleteByName").hasRole("ADMIN")
         .antMatchers("/PhoneBook/deleteByNumber").hasRole("ADMIN")
+        .antMatchers("/actuator/health", "/actuator/info").permitAll()//allow health check for testing
         //any other request must be authenticated(for the sake of completeness)
         .anyRequest().authenticated() 
         ).httpBasic(httpBasic->httpBasic.authenticationEntryPoint(myAuthenticationEntryPoint));//enable http basic authorization, helps log failed logins

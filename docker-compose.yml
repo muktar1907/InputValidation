@@ -1,0 +1,41 @@
+services:
+  phonebook:
+    build:
+      context: . #current directory
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      Initial_Admin_Username: ${Initial_Admin_Username}
+      Initial_Admin_Password: ${Initial_Admin_Password}
+    #health check to ensure requests aren't made until ready
+    healthcheck:
+    #endpoint is created by spring-boot-starter-actuator dependency
+      #-f makes curl exit if exit code is >=400(request failed)
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 15s #repeat test every 10s
+      timeout: 15s #docker will wait 10 seconds for curl command to complete
+      retries: 20 #retry ten times, since container can take awhile to start up
+  
+  postman-tests:
+    build:
+      context: ./postman-tests #look in this file for the docker containing postman tests
+    #this docker container won't start until phonebook is up and running
+    depends_on: 
+      phonebook:
+        condition: service_healthy
+    #tells docker to run the test container in the same network as the
+    #PhoneBook. Basically lets both use localhost
+    network_mode: "service:phonebook"
+    #shut down application if tests fail
+    command:
+      - run
+      - /etc/newman/PhoneBook_API_Test.postman_collection.json
+      - --environment
+      - /etc/newman/Testing_Environment.postman_environment.json
+      - --reporters
+      - cli,junit
+      - --delay-request
+      - "500"
+

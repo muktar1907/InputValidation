@@ -4,6 +4,10 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean install
 
 FROM openjdk:11-jre-slim
+#install curl to do health check
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+
 
 #setting environment variables
 ENV DB_USERNAME=${DB_USERNAME}

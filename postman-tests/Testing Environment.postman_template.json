@@ -1,0 +1,20 @@
+{
+	
+	"name": "Testing Environment",
+	"values": [
+		{
+			"key": "Initial_Admin_Username",
+			"value": "custom value",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "Initial_Admin_Password",
+			"value": "custom value",
+			"type": "secret",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment"
+	
+}

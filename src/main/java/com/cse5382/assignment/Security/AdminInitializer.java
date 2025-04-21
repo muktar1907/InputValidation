@@ -20,7 +20,8 @@ public class AdminInitializer implements CommandLineRunner
     @Autowired
     //instance of a passwordEncoder needed to encode the initial admin's password
     private PasswordEncoder passwordEncoder;
-    //default values taken from environment variables
+    //default values taken from environment variables specifically those stored in
+    //the applications.yml file under Initial.Admin.Username/Password
     @Value("${Initial_Admin_Username}")
     private String defaultUsername;
     @Value("${Initial_Admin_Password}")

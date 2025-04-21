@@ -1,0 +1,2492 @@
+{
+	"info": {
+		"_postman_id": "3e477f80-8f27-4a34-a835-72352fd2f4de",
+		"name": "PhoneBook API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43809443",
+		"_collection_link": "https://muktaroyegbefun.postman.co/workspace/32797294-88b2-455d-8448-f9959ff881bd/collection/43809443-3e477f80-8f27-4a34-a835-72352fd2f4de?action=share&source=collection_link&creator=43809443"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    let request = JSON.parse(pm.request.body.raw);\r",
+							"    \r",
+							"    pm.environment.set(\"createdUsername\", request.username);\r",
+							"    pm.environment.set(\"createdPassword\", request.password);\r",
+							"\r",
+							"    \r",
+							"} catch (e) {\r",
+							"    console.error(\"Error parsing request body:\", e);\r",
+							"}\r",
+							"\r",
+							"// Check status\r",
+							"pm.test(\"Check status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"user\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/createUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"createUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestList",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"createdUsername\");\r",
+							"let password=pm.environment.get(\"createdPassword\");\r",
+							"\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status code\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"}\r",
+							");\r",
+							"pm.test(\"Check contents\",function(){\r",
+							"    console.log(pm.response.json());\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"createdUsername\");\r",
+							"let password=pm.environment.get(\"createdPassword\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:'Basic '+encodedCredentials\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{\r",
+							"    pm.test(\"Check status code\",function(){\r",
+							"        pm.response.to.have.status(200);\r",
+							"    })\r",
+							"    pm.environment.unset(\"createdUsername\");\r",
+							"    pm.environment.unset(\"createdPassword\");\r",
+							"}\r",
+							"catch(e)\r",
+							"{\r",
+							"    console.log(\"Error unsetting env variables:\"+ e);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/deleteUser?password=password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"deleteUser"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPhone1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"john\",\r\n    \"phoneNumber\":\"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"mary\",\r\n    \"phoneNumber\":\"(703)111-2121\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"joseph\",\r\n    \"phoneNumber\":\"123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone4",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"josephine\",\r\n    \"phoneNumber\":\"+1(703)111-2121\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone5",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"joe\",\r\n    \"phoneNumber\":\"+32 (21) 212-2324\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone6",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"james\",\r\n    \"phoneNumber\":\"1(703)123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone7",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"timmy\",\r\n    \"phoneNumber\":\"011 701 111 1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone8",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"samantha\",\r\n    \"phoneNumber\":\"12345.12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone9",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"jane\",\r\n    \"phoneNumber\":\"011 1 703 111 1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone10",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"jane foster\",\r\n    \"phoneNumber\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone11",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"billy\",\r\n    \"phoneNumber\":\"1/703/123/1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone12",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"bobby\",\r\n    \"phoneNumber\":\"Nr 102-123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone13",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"charles\",\r\n    \"phoneNumber\":\"Nr 102-123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone14",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"xavier\",\r\n    \"phoneNumber\":\"<script>alert(“XSS”)</script>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone15",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"henry\",\r\n    \"phoneNumber\":\"+1234 (201) 123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone16",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"carly\",\r\n    \"phoneNumber\":\"(001) 123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone17",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"molly\",\r\n    \"phoneNumber\":\"+01 (703) 123-1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhone18",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"sally\",\r\n    \"phoneNumber\":\"(703) 123-1234 ext 204\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Bruce Schneier\",\r\n    \"phoneNumber\":\"11111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Schneier, Bruce\",\r\n    \"phoneNumber\":\"11112\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Schneier, Bruce Wayne\",\r\n    \"phoneNumber\":\"11113\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName4",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"O'Malley, John F.\",\r\n    \"phoneNumber\":\"11114\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName5",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"John O'Malley-Smith\",\r\n    \"phoneNumber\":\"11115\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName6",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Cher\",\r\n    \"phoneNumber\":\"11116\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName7",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Ron O''Henry\",\r\n    \"phoneNumber\":\"11117\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName8",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Ron O'Henry-Smith-Barnes\",\r\n    \"phoneNumber\":\"11118\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName9",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"L33t Hacker\",\r\n    \"phoneNumber\":\"11119\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName10",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"<Script>alert(\\\"XSS\\\")</Script>\",\r\n    \"phoneNumber\":\"11110\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName11",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Brad Everett Samuel Smith\",\r\n    \"phoneNumber\":\"11120\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addName12",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"select * from users;\",\r\n    \"phoneNumber\":\"11121\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customInput",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//shouldn't allow duplicate phone number\r",
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"cheryl\",\r\n    \"phoneNumber\":\"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customInput2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"James-johnson, henry\",\r\n    \"phoneNumber\":\"11121\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customInput3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//shouldn't allow mixing dots, and dashes\r",
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"john smith\",\r\n    \"phoneNumber\":\"(111)-204.1965\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteByNum",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/deleteByNumber?number=12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"deleteByNumber"
+					],
+					"query": [
+						{
+							"key": "number",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteByNum2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//not found error if number doesn't exist\r",
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/deleteByNumber?number=11117",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"deleteByNumber"
+					],
+					"query": [
+						{
+							"key": "number",
+							"value": "11117"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteByName",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/deleteByName?name=Cher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"deleteByName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Cher"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteByName2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/deleteByName?name=Celeste",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"deleteByName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Celeste"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
