@@ -146,4 +146,15 @@ public class PhoneBookServiceImpl implements PhoneBookService{
             throw new Exception("Invalid Input");
         }
     }
+    @Override
+    public void reset()
+    {
+        try
+        {
+            phoneBookRepository.deleteAll();
+        }catch(Exception e)
+        {
+            System.out.println("reset DB error: "+e);
+        }
+    }
 }

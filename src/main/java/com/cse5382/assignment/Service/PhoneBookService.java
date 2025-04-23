@@ -12,6 +12,7 @@ public interface PhoneBookService {
     public void deleteByName(String name) throws Exception;
 
     public String deleteByNumber(String phoneNumber) throws Exception;
+    public void reset()throws Exception;
     
 
 }

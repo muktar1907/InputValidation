@@ -167,4 +167,12 @@ public class Controller {
         return new ResponseEntity<>(HttpStatus.OK);
         
     }
+
+    @PutMapping(path="/PhoneBook/reset")
+    public ResponseEntity<?> resetDB() throws Exception
+    {
+        System.out.println("Resetting Database");
+        phoneBookService.reset();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

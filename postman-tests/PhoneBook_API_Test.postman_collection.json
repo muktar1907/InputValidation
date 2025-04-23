@@ -2487,6 +2487,59 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "reset",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//get saved user credentials\r",
+							"let username=pm.environment.get(\"Initial_Admin_Username\");\r",
+							"let password=pm.environment.get(\"Initial_Admin_Password\");\r",
+							"//encode credentials in Base64\r",
+							"let encodedCredentials = btoa(username+ \":\"+password);\r",
+							"//set auth header\r",
+							"pm.request.headers.add({\r",
+							"    key:'Authorization',\r",
+							"    value:`Basic ${encodedCredentials}`\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PhoneBook/reset",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PhoneBook",
+						"reset"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

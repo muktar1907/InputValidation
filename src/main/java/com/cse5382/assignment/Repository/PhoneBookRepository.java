@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -68,13 +68,7 @@ public class PhoneBookRepository {
 
     @Transactional//ensures consistency of database after updates
     public String deleteByNumber(String phoneNumber){
-        /*int index = IntStream.range(0, list.size())
-                .filter(i -> list.get(i).getPhoneNumber().equals(phoneNumber))
-                .findFirst()
-                .orElse(-1);
-        if(index!=-1){
-            list.remove(index);
-        }*/
+      
         String name="";
         //create queries
         //first must check if the name exists in the database at all
@@ -107,6 +101,12 @@ public class PhoneBookRepository {
         {
             return true;
         }
+    }
+
+    public void deleteAll()
+    {
+        Query query= entityManager.createQuery("delete from phonebook p");
+        query.executeUpdate();
     }
     
 }

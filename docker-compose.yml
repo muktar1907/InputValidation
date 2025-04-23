@@ -1,5 +1,6 @@
 services:
   phonebook:
+    container_name: phonebook
     build:
       context: . #current directory
     ports:
@@ -14,11 +15,12 @@ services:
     #endpoint is created by spring-boot-starter-actuator dependency
       #-f makes curl exit if exit code is >=400(request failed)
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 15s #repeat test every 10s
-      timeout: 15s #docker will wait 10 seconds for curl command to complete
-      retries: 20 #retry ten times, since container can take awhile to start up
+      interval: 10s #repeat test every 10s
+      timeout: 10s #docker will wait 10 seconds for curl command to complete
+      retries: 10 #retry ten times, since container can take awhile to start up
   
   postman-tests:
+    container_name: postman-tests
     build:
       context: ./postman-tests #look in this file for the docker containing postman tests
     #this docker container won't start until phonebook is up and running
