@@ -4,9 +4,6 @@ spring:
   application:
     name: phonebook
   datasource:
-    url: jdbc:mysql://host.docker.internal:3306/PhoneBook
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -24,7 +21,9 @@ initial:
 
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
+  file: 
+    name: /logs/app.log
     
 management:
   endpoints:

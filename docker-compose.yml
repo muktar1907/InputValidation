@@ -7,9 +7,16 @@ services:
       - "8080:8080"
     volumes:
       - ./logs:/logs
+    depends_on:
+      - mysql
     environment:
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+    #spring will automatically recognize the variables by the prefix
+    #and reconcile it with the values stored in the .env file at the root and apply it to the mysql configuration info in applications.yml
+    #this url uses the service name 'mysql' as defined in docker-compose
+    #as the hostname
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
       Initial_Admin_Username: ${Initial_Admin_Username}
       Initial_Admin_Password: ${Initial_Admin_Password}
     #health check to ensure requests aren't made until ready
@@ -45,3 +52,21 @@ services:
       - --delay-request
       - "500"
 
+  mysql:
+    image: mysql:8.0
+    container_name: phonebook_db
+    restart: always
+    environment:
+    #mandatory env variables for the mysql image
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+    #database data will be mounted to a file in this folder
+      - db_data:/var/lib/mysql #mysql image uses this specific path as the default for storing data
+    ports:
+      - "3306:3306"
+volumes:
+#this volume is created and managed by docker
+  db_data:

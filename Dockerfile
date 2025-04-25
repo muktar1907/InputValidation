@@ -5,7 +5,7 @@ RUN mvn -f /home/app/pom.xml clean install
 
 FROM openjdk:11-jre-slim
 #install curl to do health check
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl netcat && rm -rf /var/lib/apt/lists/*
 
 
 
@@ -14,5 +14,9 @@ ENV DB_USERNAME=${DB_USERNAME}
 ENV DB_PASSWORD=${DB_PASSWORD}
 
 COPY --from=build /home/app/target/assignment-0.0.1-SNAPSHOT.jar /usr/local/lib/app.jar
+#copy waiting script
+COPY wait_for_mysql.sh /usr/local/bin/wait_for_mysql.sh
+#make it executable
+RUN chmod +x /usr/local/bin/wait_for_mysql.sh
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]
+ENTRYPOINT ["/usr/local/bin/wait_for_mysql.sh"]
