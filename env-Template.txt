@@ -1,0 +1,7 @@
+#set these values to whatever you want/need
+#rename the file to .env
+DB_USERNAME=
+DB_PASSWORD=
+
+Initial_Admin_Username=
+Initial_Admin_Password=
