@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig
 {
     @Autowired//creates instance of something automatically
-    private MyUserDetailsService adminDetailsService;
+    private MyUserDetailsService userDetailsService;
     @Autowired
     private CustomAuthenticationEntryPoint myAuthenticationEntryPoint;
     @Bean
@@ -54,7 +54,7 @@ public class SecurityConfig
         return http.getSharedObject(AuthenticationManagerBuilder.class)
             //tells spring to use my predefined implementation of the UserDetailsService
             //which is what I use to load admins from the database for authentication
-            .userDetailsService(adminDetailsService)
+            .userDetailsService(userDetailsService)
             //tells spring to encode passwords with a particular predefined encoder
             //then compare it to what's stored in the db when an admin tries to login
             .passwordEncoder(passwordEncoder())

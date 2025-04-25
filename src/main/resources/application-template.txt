@@ -1,4 +1,4 @@
-
+make this file the application.yml file
 #MySQL Database Configuration
 spring:
   application:
@@ -24,7 +24,7 @@ initial:
 
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
     
 management:
   endpoints:
