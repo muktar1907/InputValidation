@@ -817,3 +817,328 @@ Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo can
 	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
 	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
 	... 35 common frames omitted
+2025-04-25 03:04:30,813 - HV000001: Hibernate Validator 6.2.3.Final
+2025-04-25 03:04:30,838 - Starting AssignmentApplication v0.0.1-SNAPSHOT using Java 11.0.16 on 39f87c7db541 with PID 1 (/usr/local/lib/app.jar started by root in /)
+2025-04-25 03:04:30,847 - No active profile set, falling back to 1 default profile: "default"
+2025-04-25 03:04:33,255 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-25 03:04:33,347 - Finished Spring Data repository scanning in 73 ms. Found 1 JPA repository interfaces.
+2025-04-25 03:04:34,725 - Tomcat initialized with port(s): 8080 (http)
+2025-04-25 03:04:34,748 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-25 03:04:34,751 - Starting service [Tomcat]
+2025-04-25 03:04:34,752 - Starting Servlet engine: [Apache Tomcat/9.0.63]
+2025-04-25 03:04:34,925 - Initializing Spring embedded WebApplicationContext
+2025-04-25 03:04:34,926 - Root WebApplicationContext: initialization completed in 3931 ms
+2025-04-25 03:04:35,679 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-25 03:04:35,788 - HHH000412: Hibernate ORM core version 5.6.9.Final
+2025-04-25 03:04:36,132 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-04-25 03:04:36,325 - HikariPool-1 - Starting...
+2025-04-25 03:04:37,009 - HikariPool-1 - Start completed.
+2025-04-25 03:04:37,072 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2025-04-25 03:04:38,719 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-04-25 03:04:38,739 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-25 03:04:40,704 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4086d8fb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@66236a0a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7d247660, org.springframework.security.web.header.HeaderWriterFilter@5626d18c, org.springframework.security.web.authentication.logout.LogoutFilter@2b0dc227, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6949e948, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@49d30c6f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4fdca00a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2e3572e8, org.springframework.security.web.session.SessionManagementFilter@329548d0, org.springframework.security.web.access.ExceptionTranslationFilter@35c9a231, org.springframework.security.web.access.intercept.AuthorizationFilter@7f9fc8bd]
+2025-04-25 03:04:40,837 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-25 03:04:41,828 - Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-04-25 03:04:41,897 - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-25 03:04:41,949 - Tomcat started on port(s): 8080 (http) with context path ''
+2025-04-25 03:04:41,997 - Started AssignmentApplication in 13.234 seconds (JVM running for 15.128)
+2025-04-25 03:04:47,213 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-25 03:04:47,216 - Initializing Servlet 'dispatcherServlet'
+2025-04-25 03:04:47,223 - Completed initialization in 3 ms
+2025-04-25 03:04:47,242 - Securing GET /actuator/health
+2025-04-25 03:04:47,258 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:04:47,265 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:04:47,271 - Secured GET /actuator/health
+2025-04-25 03:04:47,516 - Did not store anonymous SecurityContext
+2025-04-25 03:04:47,526 - Did not store anonymous SecurityContext
+2025-04-25 03:04:47,528 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:51,192 - Securing POST /PhoneBook/createUser
+2025-04-25 03:04:51,195 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:04:51,197 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:04:51,199 - Secured POST /PhoneBook/createUser
+2025-04-25 03:04:51,462 - A new User was created with username: 'user'
+2025-04-25 03:04:51,467 - Did not store anonymous SecurityContext
+2025-04-25 03:04:51,469 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:52,070 - Securing GET /PhoneBook/list
+2025-04-25 03:04:52,071 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:04:52,347 - Authenticated user
+2025-04-25 03:04:52,350 - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]
+2025-04-25 03:04:52,362 - Created HttpSession as SecurityContext is non-default
+2025-04-25 03:04:52,365 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@358ae82]
+2025-04-25 03:04:52,366 - Secured GET /PhoneBook/list
+2025-04-25 03:04:52,406 - User 'user' has accessed the contents of the phonebook
+2025-04-25 03:04:52,426 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@358ae82]
+2025-04-25 03:04:52,429 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@358ae82]
+2025-04-25 03:04:52,430 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:53,014 - Securing PUT /PhoneBook/deleteUser?password=password
+2025-04-25 03:04:53,015 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-04-25 03:04:53,017 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-04-25 03:04:53,019 - Secured PUT /PhoneBook/deleteUser?password=password
+2025-04-25 03:04:53,214 - User 'user' deleted their account
+2025-04-25 03:04:53,216 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:53,762 - Securing POST /PhoneBook/add
+2025-04-25 03:04:53,764 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-04-25 03:04:53,766 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@42432f5, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-04-25 03:04:53,902 - Authenticated user
+2025-04-25 03:04:53,904 - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]
+2025-04-25 03:04:53,906 - Secured POST /PhoneBook/add
+2025-04-25 03:04:53,940 - User 'sp_Student' has added a new entry to the phone book:{Name:'john',Number:'12345'}
+2025-04-25 03:04:53,943 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@358ae82]
+2025-04-25 03:04:53,947 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@358ae82]
+2025-04-25 03:04:53,948 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:54,496 - Securing POST /PhoneBook/add
+2025-04-25 03:04:54,497 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:54,499 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:54,500 - Secured POST /PhoneBook/add
+2025-04-25 03:04:54,533 - User 'sp_Student' has added a new entry to the phone book:{Name:'mary',Number:'(703)111-2121'}
+2025-04-25 03:04:54,538 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:55,084 - Securing POST /PhoneBook/add
+2025-04-25 03:04:55,086 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:55,087 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:55,089 - Secured POST /PhoneBook/add
+2025-04-25 03:04:55,118 - User 'sp_Student' has added a new entry to the phone book:{Name:'joseph',Number:'123-1234'}
+2025-04-25 03:04:55,122 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:55,671 - Securing POST /PhoneBook/add
+2025-04-25 03:04:55,672 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:55,674 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:55,676 - Secured POST /PhoneBook/add
+2025-04-25 03:04:55,706 - User 'sp_Student' has added a new entry to the phone book:{Name:'josephine',Number:'+1(703)111-2121'}
+2025-04-25 03:04:55,710 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:56,253 - Securing POST /PhoneBook/add
+2025-04-25 03:04:56,255 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:56,257 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:56,259 - Secured POST /PhoneBook/add
+2025-04-25 03:04:56,289 - User 'sp_Student' has added a new entry to the phone book:{Name:'joe',Number:'+32 (21) 212-2324'}
+2025-04-25 03:04:56,293 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:56,853 - Securing POST /PhoneBook/add
+2025-04-25 03:04:56,855 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:56,856 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:56,858 - Secured POST /PhoneBook/add
+2025-04-25 03:04:56,888 - User 'sp_Student' has added a new entry to the phone book:{Name:'james',Number:'1(703)123-1234'}
+2025-04-25 03:04:56,892 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:57,441 - Securing POST /PhoneBook/add
+2025-04-25 03:04:57,442 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:57,443 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:57,445 - Secured POST /PhoneBook/add
+2025-04-25 03:04:57,474 - User 'sp_Student' has added a new entry to the phone book:{Name:'timmy',Number:'011 701 111 1234'}
+2025-04-25 03:04:57,478 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:57,621 - Securing GET /actuator/health
+2025-04-25 03:04:57,622 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:04:57,623 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:04:57,625 - Secured GET /actuator/health
+2025-04-25 03:04:57,632 - Did not store anonymous SecurityContext
+2025-04-25 03:04:57,634 - Did not store anonymous SecurityContext
+2025-04-25 03:04:57,635 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:58,042 - Securing POST /PhoneBook/add
+2025-04-25 03:04:58,044 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:58,045 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:58,047 - Secured POST /PhoneBook/add
+2025-04-25 03:04:58,078 - User 'sp_Student' has added a new entry to the phone book:{Name:'samantha',Number:'12345.12345'}
+2025-04-25 03:04:58,083 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:58,640 - Securing POST /PhoneBook/add
+2025-04-25 03:04:58,641 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:58,642 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:58,645 - Secured POST /PhoneBook/add
+2025-04-25 03:04:58,679 - User 'sp_Student' has added a new entry to the phone book:{Name:'jane',Number:'011 1 703 111 1234'}
+2025-04-25 03:04:58,683 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:59,240 - Securing POST /PhoneBook/add
+2025-04-25 03:04:59,243 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:59,245 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:59,248 - Secured POST /PhoneBook/add
+2025-04-25 03:04:59,282 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:04:59,288 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:04:59,850 - Securing POST /PhoneBook/add
+2025-04-25 03:04:59,851 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:59,853 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:04:59,854 - Secured POST /PhoneBook/add
+2025-04-25 03:04:59,869 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:04:59,871 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:00,419 - Securing POST /PhoneBook/add
+2025-04-25 03:05:00,421 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:00,422 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:00,423 - Secured POST /PhoneBook/add
+2025-04-25 03:05:00,437 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:00,440 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:00,997 - Securing POST /PhoneBook/add
+2025-04-25 03:05:00,999 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:01,000 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:01,002 - Secured POST /PhoneBook/add
+2025-04-25 03:05:01,018 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:01,022 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:01,564 - Securing POST /PhoneBook/add
+2025-04-25 03:05:01,565 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:01,567 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:01,569 - Secured POST /PhoneBook/add
+2025-04-25 03:05:01,584 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:01,587 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:02,135 - Securing POST /PhoneBook/add
+2025-04-25 03:05:02,136 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:02,138 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:02,140 - Secured POST /PhoneBook/add
+2025-04-25 03:05:02,160 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:02,163 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:02,707 - Securing POST /PhoneBook/add
+2025-04-25 03:05:02,709 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:02,711 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:02,712 - Secured POST /PhoneBook/add
+2025-04-25 03:05:02,729 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:02,731 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:03,271 - Securing POST /PhoneBook/add
+2025-04-25 03:05:03,272 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:03,273 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:03,275 - Secured POST /PhoneBook/add
+2025-04-25 03:05:03,302 - User 'sp_Student' has added a new entry to the phone book:{Name:'molly',Number:'+01 (703) 123-1234'}
+2025-04-25 03:05:03,307 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:03,850 - Securing POST /PhoneBook/add
+2025-04-25 03:05:03,851 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:03,852 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:03,854 - Secured POST /PhoneBook/add
+2025-04-25 03:05:03,868 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:03,871 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:04,412 - Securing POST /PhoneBook/add
+2025-04-25 03:05:04,413 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:04,415 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:04,416 - Secured POST /PhoneBook/add
+2025-04-25 03:05:04,442 - User 'sp_Student' has added a new entry to the phone book:{Name:'Bruce Schneier',Number:'11111'}
+2025-04-25 03:05:04,445 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:04,980 - Securing POST /PhoneBook/add
+2025-04-25 03:05:04,982 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:04,983 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:04,985 - Secured POST /PhoneBook/add
+2025-04-25 03:05:05,012 - User 'sp_Student' has added a new entry to the phone book:{Name:'Schneier, Bruce',Number:'11112'}
+2025-04-25 03:05:05,015 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:05,554 - Securing POST /PhoneBook/add
+2025-04-25 03:05:05,555 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:05,557 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:05,559 - Secured POST /PhoneBook/add
+2025-04-25 03:05:05,589 - User 'sp_Student' has added a new entry to the phone book:{Name:'Schneier, Bruce Wayne',Number:'11113'}
+2025-04-25 03:05:05,594 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:06,129 - Securing POST /PhoneBook/add
+2025-04-25 03:05:06,130 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:06,131 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:06,133 - Secured POST /PhoneBook/add
+2025-04-25 03:05:06,161 - User 'sp_Student' has added a new entry to the phone book:{Name:'O'Malley, John F.',Number:'11114'}
+2025-04-25 03:05:06,164 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:06,709 - Securing POST /PhoneBook/add
+2025-04-25 03:05:06,710 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:06,711 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:06,712 - Secured POST /PhoneBook/add
+2025-04-25 03:05:06,739 - User 'sp_Student' has added a new entry to the phone book:{Name:'John O'Malley-Smith',Number:'11115'}
+2025-04-25 03:05:06,743 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:07,276 - Securing POST /PhoneBook/add
+2025-04-25 03:05:07,278 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:07,279 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:07,280 - Secured POST /PhoneBook/add
+2025-04-25 03:05:07,308 - User 'sp_Student' has added a new entry to the phone book:{Name:'Cher',Number:'11116'}
+2025-04-25 03:05:07,312 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:07,716 - Securing GET /actuator/health
+2025-04-25 03:05:07,717 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:05:07,718 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:05:07,720 - Secured GET /actuator/health
+2025-04-25 03:05:07,726 - Did not store anonymous SecurityContext
+2025-04-25 03:05:07,728 - Did not store anonymous SecurityContext
+2025-04-25 03:05:07,729 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:07,860 - Securing POST /PhoneBook/add
+2025-04-25 03:05:07,862 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:07,863 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:07,865 - Secured POST /PhoneBook/add
+2025-04-25 03:05:07,880 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:07,882 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:08,435 - Securing POST /PhoneBook/add
+2025-04-25 03:05:08,437 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:08,438 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:08,440 - Secured POST /PhoneBook/add
+2025-04-25 03:05:08,457 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:08,461 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:09,018 - Securing POST /PhoneBook/add
+2025-04-25 03:05:09,020 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:09,021 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:09,023 - Secured POST /PhoneBook/add
+2025-04-25 03:05:09,040 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:09,042 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:09,609 - Securing POST /PhoneBook/add
+2025-04-25 03:05:09,611 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:09,612 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:09,614 - Secured POST /PhoneBook/add
+2025-04-25 03:05:09,629 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:09,632 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:10,175 - Securing POST /PhoneBook/add
+2025-04-25 03:05:10,176 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:10,177 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:10,179 - Secured POST /PhoneBook/add
+2025-04-25 03:05:10,193 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:10,195 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:10,738 - Securing POST /PhoneBook/add
+2025-04-25 03:05:10,739 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:10,741 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:10,742 - Secured POST /PhoneBook/add
+2025-04-25 03:05:10,757 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:10,759 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:11,302 - Securing POST /PhoneBook/add
+2025-04-25 03:05:11,303 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:11,304 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:11,306 - Secured POST /PhoneBook/add
+2025-04-25 03:05:11,324 - User 'sp_Student' attempted to add a phone number that already exists
+2025-04-25 03:05:11,327 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:11,877 - Securing POST /PhoneBook/add
+2025-04-25 03:05:11,879 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:11,881 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:11,882 - Secured POST /PhoneBook/add
+2025-04-25 03:05:11,910 - User 'sp_Student' has added a new entry to the phone book:{Name:'James-johnson, henry',Number:'11121'}
+2025-04-25 03:05:11,913 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:12,449 - Securing POST /PhoneBook/add
+2025-04-25 03:05:12,450 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:12,451 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:12,453 - Secured POST /PhoneBook/add
+2025-04-25 03:05:12,467 - User 'sp_Student' attempted to add an entry with invalid inputs
+2025-04-25 03:05:12,470 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:13,003 - Securing PUT /PhoneBook/deleteByNumber?number=12345
+2025-04-25 03:05:13,004 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:13,006 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:13,007 - Secured PUT /PhoneBook/deleteByNumber?number=12345
+2025-04-25 03:05:13,055 - User 'sp_Student' has deleted an entry from the phone book by number:[Name: 'john', Number:'12345']
+2025-04-25 03:05:13,057 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:13,595 - Securing PUT /PhoneBook/deleteByNumber?number=11117
+2025-04-25 03:05:13,596 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:13,597 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:13,599 - Secured PUT /PhoneBook/deleteByNumber?number=11117
+2025-04-25 03:05:13,616 - User 'sp_Student' attempted to delete a non-existent entry
+2025-04-25 03:05:13,618 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:14,154 - Securing PUT /PhoneBook/deleteByName?name=Cher
+2025-04-25 03:05:14,156 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:14,158 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:14,159 - Secured PUT /PhoneBook/deleteByName?name=Cher
+2025-04-25 03:05:14,192 - User 'sp_Student' has deleted an entry from the phone book by name: Name:'Cher'
+2025-04-25 03:05:14,194 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:14,733 - Securing PUT /PhoneBook/deleteByName?name=Celeste
+2025-04-25 03:05:14,735 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:14,736 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:14,737 - Secured PUT /PhoneBook/deleteByName?name=Celeste
+2025-04-25 03:05:14,757 - User 'sp_Student' attempted to delete a non-existent entry
+2025-04-25 03:05:14,760 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:15,298 - Securing PUT /PhoneBook/reset
+2025-04-25 03:05:15,299 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:15,300 - Set SecurityContextHolder to SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=com.cse5382.assignment.Security.myUserDetails@1bce6d67, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=76768DB905932247FB994516BC9E5A63], Granted Authorities=[ROLE_ADMIN]]]
+2025-04-25 03:05:15,302 - Secured PUT /PhoneBook/reset
+2025-04-25 03:05:15,325 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:17,809 - Securing GET /actuator/health
+2025-04-25 03:05:17,811 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:05:17,812 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:05:17,813 - Secured GET /actuator/health
+2025-04-25 03:05:17,822 - Did not store anonymous SecurityContext
+2025-04-25 03:05:17,824 - Did not store anonymous SecurityContext
+2025-04-25 03:05:17,824 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:27,922 - Securing GET /actuator/health
+2025-04-25 03:05:27,924 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:05:27,925 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:05:27,927 - Secured GET /actuator/health
+2025-04-25 03:05:27,937 - Did not store anonymous SecurityContext
+2025-04-25 03:05:27,939 - Did not store anonymous SecurityContext
+2025-04-25 03:05:27,941 - Cleared SecurityContextHolder to complete request
+2025-04-25 03:05:38,028 - Securing GET /actuator/health
+2025-04-25 03:05:38,029 - Set SecurityContextHolder to empty SecurityContext
+2025-04-25 03:05:38,030 - Set SecurityContextHolder to anonymous SecurityContext
+2025-04-25 03:05:38,032 - Secured GET /actuator/health
+2025-04-25 03:05:38,043 - Did not store anonymous SecurityContext
+2025-04-25 03:05:38,045 - Did not store anonymous SecurityContext
+2025-04-25 03:05:38,045 - Cleared SecurityContextHolder to complete request

@@ -5,6 +5,8 @@ services:
       context: . #current directory
     ports:
       - "8080:8080"
+    volumes:
+      - ./logs:/logs
     environment:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -24,6 +26,8 @@ services:
     build:
       context: ./postman-tests #look in this file for the docker containing postman tests
     #this docker container won't start until phonebook is up and running
+    volumes:
+      - ./logs:/logs
     depends_on: 
       phonebook:
         condition: service_healthy

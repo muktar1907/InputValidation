@@ -7,7 +7,7 @@
     </appender>
 
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>app.log</file>
+        <file>/logs/app.log</file>
         <encoder>
             <pattern>%d - %msg%n</pattern>
         </encoder>
@@ -17,7 +17,7 @@
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>30</maxHistory>
             <totalSizeCap>100MB</totalSizeCap>
-            <cleanHistoryOnStart>false</cleanHistoryOnStart>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
     </appender>
 
