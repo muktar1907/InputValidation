@@ -39,3 +39,5 @@ build/
 
 #postman test environment
 postman-tests\Testing Environment.postman_environment.json
+#logs
+.logs
